@@ -1,0 +1,138 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+:root {
+  --font-text: var(--font-roboto); /* font pour les textes */
+  --font-title: var(--font-serif); /* font pour les titres */
+  --text-color: #ffffff;
+  --heading-color: #ffffff;
+  --background-color: #7c86ff;
+  --highlight-color: #95f6e3;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-text);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Titres principaux */
+h1,
+.h1 {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: var(--heading-color);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-align: left;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  word-break: break-word;
+}
+
+@media (min-width: 640px) {
+  h1,
+  .h1 {
+    font-size: 3rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  h1,
+  .h1 {
+    font-size: 4rem;
+    padding-left: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h1,
+  .h1 {
+    font-size: 5rem;
+    padding-left: 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  h1,
+  .h1 {
+    font-size: 6rem;
+    padding-left: 5rem;
+  }
+}
+
+h2,
+.h2 {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+
+h3,
+.h3 {
+  font-family: var(--font-text);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Liens */
+a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Boutons texte */
+.button-text {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Spinner personnalisé */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  animation: l14 4s infinite;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  border: 8px solid;
+  border-radius: 50%;
+  border-color: white white #0000 #0000;
+  mix-blend-mode: darken;
+  animation: l14 1s infinite linear;
+}
+.loader::after {
+  border-color: #0000 #0000 #95f6e3 #7ee0cb;
+  animation-direction: reverse;
+}
+@keyframes l14 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
