@@ -29,7 +29,11 @@ export default function SkillCategory({
   return (
     <div>
       <h3 className="text-2xl font-title mb-6">{title}</h3>
-      <div className={isDevWeb ? "grid grid-cols-2 gap-6" : "space-y-8"}>
+      <div
+        className={
+          isDevWeb ? "grid grid-cols-1 sm:grid-cols-2 gap-6" : "space-y-8"
+        }
+      >
         {categories.map((category, index) => (
           <div
             key={index}

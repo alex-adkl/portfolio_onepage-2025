@@ -79,9 +79,39 @@ h1,
 h2,
 .h2 {
   font-family: var(--font-serif);
-  font-size: 4rem;
   font-weight: 400;
   margin-bottom: 3rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  h2,
+  .h2 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  h2,
+  .h2 {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  h2,
+  .h2 {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  h2,
+  .h2 {
+    font-size: 4rem;
+  }
 }
 
 h3,

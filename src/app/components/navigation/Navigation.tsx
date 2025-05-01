@@ -66,7 +66,7 @@ export default function Navigation() {
 
         {/* Mobile hamburger */}
         <div className="md:hidden flex justify-between items-center">
-          <span className="font-serif text-lg">a.a.</span>
+          <span className="font-serif text-lg"></span>
           <button onClick={toggleMenu} aria-label="Ouvrir le menu">
             {isOpen ? (
               <X size={28} />

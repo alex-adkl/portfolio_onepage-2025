@@ -88,8 +88,20 @@ export default function Home() {
         className="snap-start h-screen pt-24 overflow-y-auto bg-[#7c86ff] dark:bg-zinc-900 text-white"
       >
         <div className="px-8 sm:px-16 xl:px-32">
-          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-15 h-screen items-center">
-            <div className="space-y-6">
+          <h2 className="text-3xl font-title">À propos</h2>
+          <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-15 mt-24 md:items-center">
+            <div className="flex justify-center order-first md:order-last">
+              <Image
+                src="/images/Alex-Adeikalam.jpg"
+                alt="Alex Adeikalam"
+                width={600}
+                height={800}
+                className="rounded-lg shadow-lg object-cover"
+                priority
+              />
+            </div>
+
+            <div className="space-y-6 order-last md:order-first">
               <p>
                 Graphiste et directrice artistique depuis 15 ans,
                 aujourd&apos;hui j&apos;ai choisi de me réinventer dans le{" "}
@@ -136,19 +148,6 @@ export default function Home() {
                 Téléchargez mon CV
               </ButtonText>
             </div>
-
-            <div className="hidden md:block relative h-full">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Image
-                  src="/images/Alex-Adeikalam.jpg"
-                  alt="Alex Adeikalam"
-                  width={400}
-                  height={600}
-                  className="rounded-lg shadow-lg object-cover"
-                  priority
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -159,14 +158,17 @@ export default function Home() {
         className="snap-start h-screen pt-24 overflow-y-auto bg-[#7c86ff] text-white"
       >
         <div className="px-8 sm:px-16 xl:px-32">
-          <h2 className="text-3xl font-title mb-4">Projets web</h2>
+          <h2 className="font-title text-white mb-2">
+            <span>Développement</span>{" "}
+            <span style={{ color: "var(--highlight-color)" }}>Web</span>
+          </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-8xl mx-auto">
             <ProjectCard
               title="Littoral Propre"
               image="/images/dev/littoral_propre/littoral_propre_cover.svg"
               stacks={["PHP", "SQL", "Tailwind"]}
-              description="Un projet de plateforme de gestion des déchets côtiers."
+              description="Back-office développé pour une association engagée dans la collecte de déchets littoraux. Ce projet introduit les fondamentaux du back-end en PHP : architecture CRUD, gestion de base de données MySQL et sécurisation des données via PDO."
               siteUrl="http://cleansquad.rf.gd/"
               githubUrl="https://github.com/alex-adkl/projet_cleanSquad.git"
               images={[
@@ -180,7 +182,7 @@ export default function Home() {
               title="Art Quiz"
               image="/images/dev/quiz/quiz_cover.png"
               stacks={["JavaScript", "HTML", "CSS"]}
-              description="Une application ludique de quiz thématiques sur l'art."
+              description="Une application de quiz interactive sur l’histoire de l’art, développée en JavaScript pur. Ce projet met en œuvre les bases du DOM, la logique de quiz dynamique, la gestion d’événements et le débogage."
               githubUrl="https://github.com/alex-adkl/Projet_Quiz.git"
               images={[
                 "/images/dev/quiz/quiz1.png",
@@ -194,8 +196,8 @@ export default function Home() {
               title="Anciens meubles pour une nouvelle vie"
               image="/images/dev/VDM/VDM_cover.png"
               stacks={["React", "Firebase"]}
-              description="Un projet front connecté à une base de données temps réel."
-              githubUrl="https://github.com/monrepo3"
+              description="Une plateforme e-commerce collaborative réalisée en groupe, permettant la gestion de stock, l’ajout de produits et l’administration de rôles utilisateurs. Projet conçu avec une architecture front/back sécurisée, accessible et éco-conçue."
+              githubUrl="https://github.com/alex-adkl/Ventes_Meubles.git"
               images={[
                 "/images/dev/VDM/VDM_01.png",
                 "/images/dev/VDM/VDM_02.png",
@@ -210,8 +212,8 @@ export default function Home() {
               title="Post.it"
               image="/images/dev/postit/postit_cover.png"
               stacks={["Vue.JS", "Laravel", "PostgreSQL"]}
-              description="XXX."
-              githubUrl="https://github.com/monrepo3"
+              description="Un mini-réseau social développé avec Vue.js et Laravel, intégrant posts, commentaires, likes, hashtags et profils utilisateurs. Le projet met en œuvre une logique de follow, une authentification sécurisée avec Sanctum et des tests fonctionnels avec PHPUnit."
+              githubUrl="https://github.com/alex-adkl/Microblogging.git"
               images={[
                 "/images/dev/postit/postit_01.png",
                 "/images/dev/postit/postit_02.png",
@@ -226,22 +228,8 @@ export default function Home() {
               title="Portfolio"
               image="/images/bg.jpg"
               stacks={["React", "Next.JS", "TailwindCSS"]}
-              description="Un projet front connecté à une base de données temps réel."
-              githubUrl="https://github.com/monrepo3"
-              images={[
-                "/images/dev/quiz/quiz1.png",
-                "/images/dev/quiz/quiz2.png",
-                "/images/dev/quiz/quiz3.png",
-                "/images/dev/quiz/quiz4.png",
-              ]}
-            />
-
-            <ProjectCard
-              title="Projet React + Firebase"
-              image="/images/dev/quiz/quiz_cover.png"
-              stacks={["React", "Firebase"]}
-              description="Un projet front connecté à une base de données temps réel."
-              githubUrl="https://github.com/monrepo3"
+              description="Mon site vitrine personnel, développé avec Next.js, React et Tailwind. Il reflète ma double casquette de graphiste et développeuse : une navigation fluide en one-page, une UI responsive, et des animations soignées pour valoriser mes projets print et web."
+              githubUrl="https://github.com/alex-adkl/portfolio_onepage-2025.git"
               images={[
                 "/images/dev/quiz/quiz1.png",
                 "/images/dev/quiz/quiz2.png",
@@ -392,7 +380,7 @@ supports de communication. Conception et réalisation de 2 polices dingbats, à 
                 "/images/graphisme/institut_goethe/goethe-08.jpg",
               ]}
             />
-            <ProjectCard
+            {/* <ProjectCard
               title="Entre Nos"
               image="/images/graphisme/entre_nos/entreNos-cover.jpg"
               stacks={[]}
@@ -403,8 +391,8 @@ supports de communication. Conception et réalisation de 2 polices dingbats, à 
                 "/images/graphisme/entre_nos/entreNos-03.jpg",
                 "/images/graphisme/entre_nos/entreNos-04.jpg",
               ]}
-            />
-            <ProjectCard
+            /> */}
+            {/* <ProjectCard
               title="Manuels scolaires"
               image="/images/graphisme/lls/lls-cover.png"
               stacks={[]}
@@ -417,7 +405,7 @@ supports de communication. Conception et réalisation de 2 polices dingbats, à 
               stacks={[]}
               description="Rapport Road to Net Zero pour l'Institut Rousseau."
               images={["/images/graphisme/photopoche/photopoche_1.jpg"]}
-            />
+            /> */}
           </div>
         </div>
       </section>
