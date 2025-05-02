@@ -8,6 +8,7 @@ import SocialLinks from "./components/contact/SocialLinks";
 import Footer from "./components/footer/Footer";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Home() {
   return (
@@ -446,6 +447,7 @@ supports de communication. Conception et réalisation de 2 polices dingbats, à 
           </div>
         </div>
       </section>
+      <Analytics />
     </main>
   );
 }
