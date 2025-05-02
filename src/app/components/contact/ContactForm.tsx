@@ -8,7 +8,6 @@ export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [status, setStatus] = useState<"success" | "error" | null>(null);
-  const [token, setToken] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
   const sendEmail = async (e: React.FormEvent) => {
@@ -42,7 +41,13 @@ export default function ContactForm() {
         return;
       }
 
-      setToken(token);
+      const hiddenInput = document.getElementById(
+        "g-recaptcha-response"
+      ) as HTMLInputElement | null;
+      if (hiddenInput) {
+        hiddenInput.value = token;
+      }
+
       form.current?.submit();
     } catch (error) {
       console.error("Erreur d'envoi :", error);
@@ -126,7 +131,11 @@ export default function ContactForm() {
           size="invisible"
           ref={recaptchaRef}
         />
-        <input type="hidden" name="g-recaptcha-response" value={token} />
+        <input
+          type="hidden"
+          name="g-recaptcha-response"
+          id="g-recaptcha-response"
+        />
 
         <div className="text-center">
           {isLoading ? (
