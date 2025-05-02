@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://alexadeikalam.fr/:path*",
-      "permanent": true
-    }
-  ]
-}
