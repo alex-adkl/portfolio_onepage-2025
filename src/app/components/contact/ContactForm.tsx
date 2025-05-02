@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 import ButtonText from "../button-text/ButtonText";
 
@@ -44,16 +43,7 @@ export default function ContactForm() {
       }
 
       setToken(token);
-
-      await emailjs.sendForm(
-        "service_ianw1ds",
-        "template_swgu0k2",
-        form.current,
-        "mzXF92iG7V8VLMAhM"
-      );
-
-      setStatus("success");
-      form.current.reset();
+      form.current?.submit();
     } catch (error) {
       console.error("Erreur d'envoi :", error);
       setStatus("error");
@@ -81,7 +71,13 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form ref={form} onSubmit={sendEmail} className="space-y-8">
+      <form
+        ref={form}
+        onSubmit={sendEmail}
+        action="https://formspree.io/f/xwpollob" // lien Formspree
+        method="POST"
+        className="space-y-8"
+      >
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium">
@@ -126,7 +122,7 @@ export default function ContactForm() {
         </div>
 
         <ReCAPTCHA
-          sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
+          sitekey="6Lfr1CsrAAAAAGtewQjQ4DIJJdsVROs_jgkzMIFz" // clé site reCAPTCHA
           size="invisible"
           ref={recaptchaRef}
         />
