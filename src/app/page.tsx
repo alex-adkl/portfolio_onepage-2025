@@ -194,7 +194,7 @@ export default function Home() {
             />
 
             <ProjectCard
-              title="Anciens meubles pour une nouvelle vie"
+              title="Vente de meubles"
               image="/images/dev/VDM/VDM_cover.png"
               stacks={["React", "Firebase"]}
               description="Une plateforme e-commerce collaborative réalisée en groupe, permettant la gestion de stock, l’ajout de produits et l’administration de rôles utilisateurs. Projet conçu avec une architecture front/back sécurisée, accessible et éco-conçue."
