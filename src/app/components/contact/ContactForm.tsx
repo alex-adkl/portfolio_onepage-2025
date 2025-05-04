@@ -10,20 +10,22 @@ export default function ContactForm() {
   const [state, handleSubmit] = useForm("xwpollob");
   const [token, setToken] = useState<string | null>(null);
 
-  // 💡 Fonction qui exécute le reCAPTCHA avant d'envoyer à Formspree
+  // ✅ Fonction avec sauvegarde de e.currentTarget pour éviter l’erreur
   const handleSubmitWithRecaptcha = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
     try {
+      const formElement = e.currentTarget; // 🔐 sauve l’élément HTML avant l’`await`
+
       const recaptchaToken = await recaptchaRef.current?.executeAsync();
       if (!recaptchaToken) throw new Error("reCAPTCHA échoué");
 
       setToken(recaptchaToken);
       recaptchaRef.current?.reset();
 
-      handleSubmit(e); // ✅ appel direct (pas await)
+      handleSubmit(formElement); // ✅ Formspree ne plantera pas
     } catch (error) {
       console.error("Erreur reCAPTCHA :", error);
     }
