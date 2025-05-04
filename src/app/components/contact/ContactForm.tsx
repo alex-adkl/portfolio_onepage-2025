@@ -25,6 +25,9 @@ export default function ContactForm() {
 
       recaptchaRef.current?.reset();
 
+      console.log("Token reCAPTCHA :", token);
+      console.log("Champ caché :", hiddenInput?.value);
+
       await handleSubmit(e.currentTarget);
 
       setTimeout(() => {
