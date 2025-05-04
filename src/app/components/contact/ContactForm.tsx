@@ -1,26 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import { useForm, ValidationError } from "@formspree/react";
-import ReCAPTCHA from "react-google-recaptcha";
 import ButtonText from "../button-text/ButtonText";
 
 export default function ContactForm() {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [state] = useForm("xwpollob");
-
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      await recaptchaRef.current?.executeAsync(); // déclenche le captcha invisible
-      recaptchaRef.current?.reset();
-
-      e.currentTarget.submit(); // ✅ soumission HTML classique (inclut reCAPTCHA)
-    } catch (error) {
-      console.error("Erreur reCAPTCHA :", error);
-    }
-  };
+  const [state, handleSubmit] = useForm("xwpollob");
 
   return (
     <div>
@@ -35,7 +19,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form onSubmit={handleFormSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium">
@@ -86,13 +70,6 @@ export default function ContactForm() {
             errors={state.errors}
           />
         </div>
-
-        {/* reCAPTCHA invisible, pas besoin de setToken */}
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
-          size="invisible"
-        />
 
         <div className="text-center">
           <ButtonText type="submit" disabled={state.submitting}>
