@@ -11,17 +11,22 @@ export default function ContactForm() {
   const [token, setToken] = useState<string | null>(null);
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const recaptchaToken = await recaptchaRef.current?.executeAsync();
-    if (!recaptchaToken) {
-      console.error("reCAPTCHA échoué");
-      return;
+    e.preventDefault(); // obligatoire pour empêcher submit natif
+
+    try {
+      const recaptchaToken = await recaptchaRef.current?.executeAsync();
+      if (!recaptchaToken) {
+        console.error("reCAPTCHA échoué");
+        return;
+      }
+
+      setToken(recaptchaToken);
+      recaptchaRef.current?.reset();
+
+      await handleSubmit(e); // 💡 ATTENDRE l'envoi
+    } catch (error) {
+      console.error("Erreur reCAPTCHA :", error);
     }
-
-    setToken(recaptchaToken);
-    recaptchaRef.current?.reset();
-
-    // ✅ laisser Formspree gérer e
-    handleSubmit(e);
   };
 
   return (
@@ -89,7 +94,6 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* reCAPTCHA invisible */}
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
