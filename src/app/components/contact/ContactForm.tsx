@@ -10,6 +10,25 @@ export default function ContactForm() {
   const [state, handleSubmit] = useForm("xwpollob");
   const [token, setToken] = useState<string | null>(null);
 
+  // 💡 Fonction qui exécute le reCAPTCHA avant d'envoyer à Formspree
+  const handleSubmitWithRecaptcha = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    try {
+      const recaptchaToken = await recaptchaRef.current?.executeAsync();
+      if (!recaptchaToken) throw new Error("reCAPTCHA échoué");
+
+      setToken(recaptchaToken);
+      recaptchaRef.current?.reset();
+
+      handleSubmit(e); // ✅ appel direct (pas await)
+    } catch (error) {
+      console.error("Erreur reCAPTCHA :", error);
+    }
+  };
+
   return (
     <div>
       {state.succeeded && (
@@ -23,7 +42,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmitWithRecaptcha} className="space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium">
@@ -75,7 +94,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Champ reCAPTCHA invisible */}
+        {/* reCAPTCHA invisible */}
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
