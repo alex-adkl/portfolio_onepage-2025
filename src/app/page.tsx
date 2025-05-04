@@ -86,7 +86,7 @@ export default function Home() {
       {/* Présentation */}
       <section
         id="apropos"
-        className="snap-start h-screen pt-24 overflow-y-auto bg-[#7c86ff] dark:bg-zinc-900 text-white"
+        className="snap-start h-screen pt-24 overflow-y-auto bg-[#7c86ff] text-white"
       >
         <div className="px-8 sm:px-16 xl:px-32">
           <h2 className="text-3xl font-title">À propos</h2>

@@ -161,6 +161,27 @@ a:hover {
   border-color: #0000 #0000 #95f6e3 #7ee0cb;
   animation-direction: reverse;
 }
+
+input::placeholder,
+textarea::placeholder {
+  color: #ffffffcc;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #ffffffcc;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #ffffffcc;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #ffffffcc;
+}
+
 @keyframes l14 {
   100% {
     transform: rotate(1turn);

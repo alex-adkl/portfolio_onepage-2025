@@ -2,7 +2,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full text-center text-sm text-white/60 bg-[#7c86ff] dark:bg-zinc-900">
+    <footer className="w-full text-center text-sm text-white/60 bg-[#7c86ff]">
       <div className="w-full">
         <p className="py-4">
           Développé avec{" "}

@@ -32,20 +32,13 @@ export default function ContactForm() {
     try {
       setIsLoading(true);
 
-      const token = await recaptchaRef.current?.executeAsync();
-      recaptchaRef.current?.reset();
-
-      if (!token) {
-        setStatus("error");
-        setIsLoading(false);
-        return;
-      }
-
       const hiddenInput = document.getElementById(
         "g-recaptcha-response"
       ) as HTMLInputElement | null;
-      if (hiddenInput) {
-        hiddenInput.value = token;
+      if (!hiddenInput || !hiddenInput.value) {
+        setStatus("error");
+        setIsLoading(false);
+        return;
       }
 
       form.current?.submit();
@@ -127,8 +120,13 @@ export default function ContactForm() {
         </div>
 
         <ReCAPTCHA
-          sitekey="6Lfr1CsrAAAAAGtewQjQ4DIJJdsVROs_jgkzMIFz" // clé site reCAPTCHA
-          size="invisible"
+          sitekey="6LekAi4rAAAAAFbZFsjvf1KvydMwFNCec5eucl5Y" // clé site reCAPTCHA
+          onChange={(token) => {
+            const hiddenInput = document.getElementById(
+              "g-recaptcha-response"
+            ) as HTMLInputElement | null;
+            if (hiddenInput && token) hiddenInput.value = token;
+          }}
           ref={recaptchaRef}
         />
         <input
