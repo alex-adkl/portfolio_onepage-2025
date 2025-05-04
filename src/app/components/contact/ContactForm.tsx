@@ -7,15 +7,16 @@ import ButtonText from "../button-text/ButtonText";
 
 export default function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [state, handleSubmit] = useForm("xwpollob");
+  const [state] = useForm("xwpollob");
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      await recaptchaRef.current?.executeAsync();
+      await recaptchaRef.current?.executeAsync(); // déclenche le captcha invisible
       recaptchaRef.current?.reset();
-      handleSubmit(e);
+
+      e.currentTarget.submit(); // ✅ soumission HTML classique (inclut reCAPTCHA)
     } catch (error) {
       console.error("Erreur reCAPTCHA :", error);
     }
