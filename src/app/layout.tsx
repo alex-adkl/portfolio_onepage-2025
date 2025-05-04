@@ -18,6 +18,9 @@ const roboto = Roboto({
 export const metadata = {
   title: "Alejandra Adeikalam",
   description: "Développeuse & directrice artistique",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({

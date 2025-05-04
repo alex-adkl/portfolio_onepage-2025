@@ -9,18 +9,18 @@ export default function ContactForm() {
   return (
     <div>
       {state.succeeded && (
-        <div className="mb-6 rounded-md bg-teal-300 text-indigo-900 text-center py-2 font-medium">
-          ✅ Message envoyé avec succès ✨
+        <div className="mb-6 rounded-md bg-none text-white text-center py-2 font-medium">
+          Message envoyé avec succès ✨
         </div>
       )}
       {Array.isArray(state.errors) && state.errors.length > 0 && (
-        <div className="mb-6 rounded-md bg-red-700 text-white text-center py-2 font-medium">
+        <div className="mb-6 rounded-md bg-none text-white text-center py-2 font-medium">
           ❌ Une erreur est survenue. Veuillez réessayer.
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* 🕵️‍♀️ Honeypot field (invisible for users) */}
+        {/* 🕵️honeypot field (invisible for users) */}
         <div style={{ display: "none" }}>
           <label htmlFor="website">Ne pas remplir ce champ</label>
           <input
