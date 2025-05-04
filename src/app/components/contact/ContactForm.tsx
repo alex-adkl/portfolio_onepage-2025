@@ -18,13 +18,13 @@ export default function ContactForm() {
 
     try {
       const recaptchaToken = await recaptchaRef.current?.executeAsync();
-      if (!recaptchaToken) throw new Error("reCAPTCHA échoué");
+      if (!recaptchaToken) throw new Error("Échec reCAPTCHA");
 
       setToken(recaptchaToken);
+      await new Promise((resolve) => setTimeout(resolve, 100));
       recaptchaRef.current?.reset();
 
-      // submit vers Formspree
-      handleSubmit(e); // appel non bloquant (pas await)
+      handleSubmit(e); // appel non bloquant
     } catch (error) {
       console.error("Erreur reCAPTCHA :", error);
     }
