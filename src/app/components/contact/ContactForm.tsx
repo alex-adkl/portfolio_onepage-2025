@@ -21,10 +21,14 @@ export default function ContactForm() {
       recaptchaRef.current?.reset();
 
       // on soumet le formulaire à Formspree
-      await handleSubmit(e.currentTarget);
+      const formElement = e.currentTarget;
+      await handleSubmit(formElement);
 
-      if (state.succeeded) setStatus("success");
-      else setStatus("error");
+      // attend que `state.succeeded` soit mis à jour
+      setTimeout(() => {
+        if (state.succeeded) setStatus("success");
+        else setStatus("error");
+      }, 100);
     } catch (error) {
       console.error("Erreur lors de l'envoi :", error);
       setStatus("error");
