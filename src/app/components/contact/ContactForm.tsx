@@ -13,12 +13,8 @@ export default function ContactForm() {
     e.preventDefault();
 
     try {
-      const token = await recaptchaRef.current?.executeAsync();
-      if (!token) throw new Error("Échec reCAPTCHA");
-
+      await recaptchaRef.current?.executeAsync();
       recaptchaRef.current?.reset();
-
-      // on envoie à Formspree
       handleSubmit(e);
     } catch (error) {
       console.error("Erreur reCAPTCHA :", error);
@@ -90,7 +86,7 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Invisible reCAPTCHA */}
+        {/* reCAPTCHA invisible, pas besoin de setToken */}
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
