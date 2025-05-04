@@ -18,13 +18,15 @@ export default function ContactForm() {
       const token = await recaptchaRef.current?.executeAsync();
       if (!token) throw new Error("reCAPTCHA non validé");
 
+      const hiddenInput = document.getElementById(
+        "g-recaptcha-response"
+      ) as HTMLInputElement;
+      if (hiddenInput) hiddenInput.value = token;
+
       recaptchaRef.current?.reset();
 
-      // on soumet le formulaire à Formspree
-      const formElement = e.currentTarget;
-      await handleSubmit(formElement);
+      await handleSubmit(e.currentTarget);
 
-      // attend que `state.succeeded` soit mis à jour
       setTimeout(() => {
         if (state.succeeded) setStatus("success");
         else setStatus("error");
@@ -42,12 +44,12 @@ export default function ContactForm() {
     <div>
       {status === "success" && (
         <div className="mb-6 rounded-md bg-teal-300 text-indigo-900 text-center py-2 font-medium">
-          Message envoyé avec succès ✨
+          ✅ Message envoyé avec succès ✨
         </div>
       )}
       {status === "error" && (
         <div className="mb-6 rounded-md bg-red-700 text-white text-center py-2 font-medium">
-          Une erreur est survenue. Veuillez réessayer.
+          ❌ Une erreur est survenue. Veuillez réessayer.
         </div>
       )}
 
@@ -102,6 +104,13 @@ export default function ContactForm() {
             errors={state.errors}
           />
         </div>
+
+        {/* 🔐 Champ caché obligatoire pour reCAPTCHA */}
+        <input
+          type="hidden"
+          name="g-recaptcha-response"
+          id="g-recaptcha-response"
+        />
 
         <ReCAPTCHA
           ref={recaptchaRef}
