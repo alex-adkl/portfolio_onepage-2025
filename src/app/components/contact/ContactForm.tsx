@@ -1,60 +1,38 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import ReCAPTCHA from "react-google-recaptcha";
 import ButtonText from "../button-text/ButtonText";
 
 export default function ContactForm() {
-  const form = useRef<HTMLFormElement>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [state, handleSubmit] = useForm("xwpollob");
+  const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<"success" | "error" | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const sendEmail = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.current) return;
-
-    const nameInput = form.current.elements.namedItem(
-      "name"
-    ) as HTMLInputElement;
-    const emailInput = form.current.elements.namedItem(
-      "email"
-    ) as HTMLInputElement;
-    const messageInput = form.current.elements.namedItem(
-      "message"
-    ) as HTMLTextAreaElement;
-
-    if (!nameInput?.value || !emailInput?.value || !messageInput?.value) {
-      setStatus("error");
-      return;
-    }
-
+    setSubmitting(true);
     try {
-      setIsLoading(true);
+      const token = await recaptchaRef.current?.executeAsync();
+      if (!token) throw new Error("reCAPTCHA non validé");
 
-      const hiddenInput = document.getElementById(
-        "g-recaptcha-response"
-      ) as HTMLInputElement | null;
-      if (!hiddenInput || !hiddenInput.value) {
-        setStatus("error");
-        setIsLoading(false);
-        return;
-      }
+      recaptchaRef.current?.reset();
 
-      form.current?.submit();
+      // on soumet le formulaire à Formspree
+      await handleSubmit(e.currentTarget);
+
+      if (state.succeeded) setStatus("success");
+      else setStatus("error");
     } catch (error) {
-      console.error("Erreur d'envoi :", error);
+      console.error("Erreur lors de l'envoi :", error);
       setStatus("error");
     } finally {
-      setIsLoading(false);
+      setSubmitting(false);
+      setTimeout(() => setStatus(null), 5000);
     }
   };
-
-  useEffect(() => {
-    if (!status) return;
-    const timeout = setTimeout(() => setStatus(null), 5000);
-    return () => clearTimeout(timeout);
-  }, [status]);
 
   return (
     <div>
@@ -69,13 +47,7 @@ export default function ContactForm() {
         </div>
       )}
 
-      <form
-        ref={form}
-        onSubmit={sendEmail}
-        action="https://formspree.io/f/xwpollob" // lien Formspree
-        method="POST"
-        className="space-y-8"
-      >
+      <form onSubmit={handleFormSubmit} className="space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium">
@@ -86,9 +58,9 @@ export default function ContactForm() {
               name="name"
               id="name"
               required
-              placeholder="Entrez votre nom"
               className="w-full border-b bg-transparent py-2 text-white focus:outline-none focus:border-indigo-500"
             />
+            <ValidationError prefix="Nom" field="name" errors={state.errors} />
           </div>
           <div>
             <label htmlFor="email" className="block mb-2 text-sm font-medium">
@@ -99,8 +71,12 @@ export default function ContactForm() {
               name="email"
               id="email"
               required
-              placeholder="Entrez votre adresse mail"
               className="w-full border-b bg-transparent py-2 text-white focus:outline-none focus:border-indigo-500"
+            />
+            <ValidationError
+              prefix="Email"
+              field="email"
+              errors={state.errors}
             />
           </div>
         </div>
@@ -113,39 +89,33 @@ export default function ContactForm() {
             name="message"
             id="message"
             required
-            placeholder="Votre message"
             rows={4}
             className="w-full border-b bg-transparent py-2 text-white focus:outline-none focus:border-indigo-500"
+          />
+          <ValidationError
+            prefix="Message"
+            field="message"
+            errors={state.errors}
           />
         </div>
 
         <ReCAPTCHA
-          sitekey="6LekAi4rAAAAAFbZFsjvf1KvydMwFNCec5eucl5Y" // clé site reCAPTCHA
-          onChange={(token) => {
-            const hiddenInput = document.getElementById(
-              "g-recaptcha-response"
-            ) as HTMLInputElement | null;
-            if (hiddenInput && token) hiddenInput.value = token;
-          }}
           ref={recaptchaRef}
-        />
-        <input
-          type="hidden"
-          name="g-recaptcha-response"
-          id="g-recaptcha-response"
+          sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
+          size="invisible"
         />
 
         <div className="text-center">
-          {isLoading ? (
-            <div className="loader mx-auto" />
-          ) : (
-            <ButtonText
-              type="submit"
-              icon={
+          <ButtonText type="submit" disabled={submitting}>
+            {submitting ? (
+              <span className="loader w-5 h-5 mx-auto" />
+            ) : (
+              <>
+                Envoyer
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -156,11 +126,9 @@ export default function ContactForm() {
                   <path d="M22 2L11 13" />
                   <path d="M22 2L15 22L11 13L2 9L22 2Z" />
                 </svg>
-              }
-            >
-              Envoyer
-            </ButtonText>
-          )}
+              </>
+            )}
+          </ButtonText>
         </div>
       </form>
     </div>
