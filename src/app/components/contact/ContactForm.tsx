@@ -20,6 +20,18 @@ export default function ContactForm() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
+        {/* 🕵️‍♀️ Honeypot field (invisible for users) */}
+        <div style={{ display: "none" }}>
+          <label htmlFor="website">Ne pas remplir ce champ</label>
+          <input
+            type="text"
+            name="website"
+            id="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium">
