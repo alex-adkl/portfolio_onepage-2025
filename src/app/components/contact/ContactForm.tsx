@@ -8,55 +8,22 @@ import ButtonText from "../button-text/ButtonText";
 export default function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [state, handleSubmit] = useForm("xwpollob");
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<"success" | "error" | null>(null);
-
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    try {
-      const token = await recaptchaRef.current?.executeAsync();
-      if (!token) throw new Error("reCAPTCHA non validé");
-
-      const hiddenInput = document.getElementById(
-        "g-recaptcha-response"
-      ) as HTMLInputElement;
-      if (hiddenInput) hiddenInput.value = token;
-
-      recaptchaRef.current?.reset();
-
-      console.log("Token reCAPTCHA :", token);
-      console.log("Champ caché :", hiddenInput?.value);
-
-      await handleSubmit(e.currentTarget);
-
-      setTimeout(() => {
-        if (state.succeeded) setStatus("success");
-        else setStatus("error");
-      }, 100);
-    } catch (error) {
-      console.error("Erreur lors de l'envoi :", error);
-      setStatus("error");
-    } finally {
-      setSubmitting(false);
-      setTimeout(() => setStatus(null), 5000);
-    }
-  };
+  const [token, setToken] = useState<string | null>(null);
 
   return (
     <div>
-      {status === "success" && (
+      {state.succeeded && (
         <div className="mb-6 rounded-md bg-teal-300 text-indigo-900 text-center py-2 font-medium">
           ✅ Message envoyé avec succès ✨
         </div>
       )}
-      {status === "error" && (
+      {Array.isArray(state.errors) && state.errors.length > 0 && (
         <div className="mb-6 rounded-md bg-red-700 text-white text-center py-2 font-medium">
           ❌ Une erreur est survenue. Veuillez réessayer.
         </div>
       )}
 
-      <form onSubmit={handleFormSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <label htmlFor="name" className="block mb-2 text-sm font-medium">
@@ -108,22 +75,19 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* 🔐 Champ caché obligatoire pour reCAPTCHA */}
-        <input
-          type="hidden"
-          name="g-recaptcha-response"
-          id="g-recaptcha-response"
-        />
-
+        {/* Champ reCAPTCHA invisible */}
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey="6LcE3BwrAAAAADIDElQ1K84rtWcmtM8w7ewk3ep8"
           size="invisible"
+          badge="bottomright"
+          onChange={(token) => setToken(token)}
         />
+        <input type="hidden" name="g-recaptcha-response" value={token || ""} />
 
         <div className="text-center">
-          <ButtonText type="submit" disabled={submitting}>
-            {submitting ? (
+          <ButtonText type="submit" disabled={state.submitting}>
+            {state.submitting ? (
               <span className="loader w-5 h-5 mx-auto" />
             ) : (
               <>
