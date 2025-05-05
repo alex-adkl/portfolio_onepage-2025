@@ -2,6 +2,7 @@ import "./globals.css";
 import Navigation from "./components/navigation/Navigation";
 import { DM_Serif_Display, Roboto } from "next/font/google";
 import Head from "next/head";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
       </Head>
       <body className="bg-[#7c86ff] text-white dark:bg-zinc-900 dark:text-zinc-100">
         <Navigation />
+        <SpeedInsights />
         {children}
       </body>
     </html>
