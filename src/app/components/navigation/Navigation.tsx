@@ -6,10 +6,10 @@ import { X } from "lucide-react";
 const navLinks = [
   { label: "Accueil", href: "#accueil" },
   { label: "À propos", href: "#apropos" },
-  { label: "Web", href: "#web" },
+  { label: "Développement Web", href: "#developpement web" },
   {
-    label: "Graphisme et direction artistique",
-    href: "#graphisme et direction artistique",
+    label: "Graphisme et DA",
+    href: "#graphisme et DA",
   },
   { label: "Compétences", href: "#competences" },
   { label: "Contact", href: "#contact" },

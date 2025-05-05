@@ -155,7 +155,7 @@ export default function Home() {
 
       {/* Section Dév Web */}
       <section
-        id="web"
+        id="developpement web"
         className="snap-start h-screen pt-24 overflow-y-auto bg-[#7c86ff] text-white"
       >
         <div className="px-8 sm:px-16 xl:px-32">
@@ -229,14 +229,9 @@ export default function Home() {
               title="Portfolio"
               image="/images/bg.jpg"
               stacks={["React", "Next.JS", "TailwindCSS"]}
-              description="Mon site vitrine personnel, développé avec Next.js, React et Tailwind. Il reflète ma double casquette de graphiste et développeuse : une navigation fluide en one-page, une UI responsive, et des animations soignées pour valoriser mes projets print et web."
+              description="Mon site vitrine personnel, développé avec Next.js, React et Tailwind."
               githubUrl="https://github.com/alex-adkl/portfolio_onepage-2025.git"
-              images={[
-                "/images/dev/quiz/quiz1.png",
-                "/images/dev/quiz/quiz2.png",
-                "/images/dev/quiz/quiz3.png",
-                "/images/dev/quiz/quiz4.png",
-              ]}
+              images={["/images/dev/portfolio/portfolio-01.png"]}
             />
           </div>
         </div>
@@ -244,7 +239,7 @@ export default function Home() {
 
       {/* Section Graphisme */}
       <section
-        id="graphisme et direction artistique"
+        id="graphisme et DA"
         className="snap-start h-screen pt-24 overflow-y-auto bg-[#7c86ff] text-white"
       >
         <div className="px-8 sm:px-16 xl:px-32">
@@ -278,7 +273,8 @@ export default function Home() {
               title="Tropicalia"
               image="/images/graphisme/tropicalia/tropicalia_7.jpg"
               stacks={[]}
-              description="Projet Tropicalia."
+              description="Conception graphique du livre sur le mouvement musical tropicaliste « Tropicalia » des éditions IyaOmin (Rio de Janeiro, Brésil).
+Développé au sein du Rico Lins +Studio."
               images={[
                 "/images/graphisme/tropicalia/tropicalia_1.jpg",
                 "/images/graphisme/tropicalia/tropicalia_2.jpg",
@@ -288,7 +284,7 @@ export default function Home() {
                 "/images/graphisme/tropicalia/tropicalia_6.jpg",
               ]}
             />
-            <ProjectCard
+            {/* <ProjectCard
               title="Projeto Guri"
               image="/images/graphisme/projeto_guri/guri_00_cover.jpg"
               stacks={[]}
@@ -312,7 +308,7 @@ supports de communication. Conception et réalisation de 2 polices dingbats, à 
                 "/images/graphisme/projeto_guri/guri_07.jpg",
                 "/images/graphisme/projeto_guri/guri_08.jpg",
               ]}
-            />
+            /> */}
             <ProjectCard
               title="Jazz Sinfônica"
               image="/images/graphisme/jazz_sinfonica/Jazz-Sinfonica-01.jpg"
@@ -393,14 +389,20 @@ supports de communication. Conception et réalisation de 2 polices dingbats, à 
                 "/images/graphisme/entre_nos/entreNos-04.jpg",
               ]}
             /> */}
-            {/* <ProjectCard
+            <ProjectCard
               title="Manuels scolaires"
               image="/images/graphisme/lls/lls-cover.png"
               stacks={[]}
-              description="Projet Photopoche."
-              images={["/images/graphisme/photopoche/photopoche_1.jpg"]}
+              description="Conception graphique des maquettes et couvertures des manuels collaboratifs Lelivrescolaire.fr, niveaux collège et lycée général, technologique et professionnel.
+Français, Mathématiques, Histoire-géographie-EMC, SVT, Physique-chimie, Philosophie, Anglais, Espagnol...
+Développé au sein de Lelivrescolaire.fr.
+Les manuels sont consultables sur www.lelivrescolaire.fr."
+              images={[
+                "/images/graphisme/lls/lls-01.png",
+                "/images/graphisme/lls/lls-02.png",
+              ]}
             />
-            <ProjectCard
+            {/* <ProjectCard
               title="Road to Net Zero"
               image="/images/graphisme/institut_rousseau/IR_cover.png"
               stacks={[]}
