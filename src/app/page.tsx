@@ -168,7 +168,7 @@ export default function Home() {
             <ProjectCard
               title="Littoral Propre"
               image="/images/dev/littoral_propre/littoral_propre_cover.svg"
-              stacks={["PHP", "SQL", "Tailwind"]}
+              stacks={["PHP", "MySQL", "TailwindCSS"]}
               description="Back-office développé pour une association engagée dans la collecte de déchets littoraux. Ce projet introduit les fondamentaux du back-end en PHP : architecture CRUD, gestion de base de données MySQL et sécurisation des données via PDO."
               siteUrl="http://cleansquad.rf.gd/"
               githubUrl="https://github.com/alex-adkl/projet_cleanSquad.git"
@@ -196,7 +196,7 @@ export default function Home() {
             <ProjectCard
               title="Vente de meubles"
               image="/images/dev/VDM/VDM_cover.png"
-              stacks={["React", "Firebase"]}
+              stacks={["Vue.JS", "Laravel", "MySQL", "TailwindCSS"]}
               description="Une plateforme e-commerce collaborative réalisée en groupe, permettant la gestion de stock, l’ajout de produits et l’administration de rôles utilisateurs. Projet conçu avec une architecture front/back sécurisée, accessible et éco-conçue."
               githubUrl="https://github.com/alex-adkl/Ventes_Meubles.git"
               images={[
