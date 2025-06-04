@@ -14,6 +14,8 @@ type ProjectCardProps = {
   siteUrl?: string;
   githubUrl?: string;
   images: string[];
+  githubFrontUrl?: string;
+  githubBackUrl?: string;
 };
 
 const ProjectCard = ({
@@ -24,6 +26,8 @@ const ProjectCard = ({
   siteUrl,
   githubUrl,
   images,
+  githubFrontUrl,
+  githubBackUrl,
 }: ProjectCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -111,11 +115,20 @@ const ProjectCard = ({
                     Voir le site
                   </ButtonPurpleText>
                 )}
-                {githubUrl && (
+                {githubFrontUrl && githubBackUrl ? (
+                  <>
+                    <ButtonPurpleText href={githubFrontUrl}>
+                      Voir le front sur GitHub
+                    </ButtonPurpleText>
+                    <ButtonPurpleText href={githubBackUrl}>
+                      Voir le back sur GitHub
+                    </ButtonPurpleText>
+                  </>
+                ) : githubUrl ? (
                   <ButtonPurpleText href={githubUrl}>
                     Voir sur GitHub
                   </ButtonPurpleText>
-                )}
+                ) : null}
               </div>
             </div>
           </Dialog.Panel>
