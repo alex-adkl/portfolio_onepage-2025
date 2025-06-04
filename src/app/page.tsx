@@ -183,7 +183,7 @@ export default function Home() {
               title="Art Quiz"
               image="/images/dev/quiz/quiz_cover.png"
               stacks={["JavaScript", "HTML", "CSS"]}
-              description="Une application de quiz interactive sur l’histoire de l’art, développée en JavaScript pur. Ce projet met en œuvre les bases du DOM, la logique de quiz dynamique, la gestion d’événements et le débogage."
+              description="Une application de quiz interactive sur l'histoire de l'art, développée en JavaScript pur. Ce projet met en œuvre les bases du DOM, la logique de quiz dynamique, la gestion d'événements et le débogage."
               githubUrl="https://github.com/alex-adkl/Projet_Quiz.git"
               images={[
                 "/images/dev/quiz/quiz1.png",
@@ -197,7 +197,7 @@ export default function Home() {
               title="Vente de meubles"
               image="/images/dev/VDM/VDM_cover.png"
               stacks={["Vue.JS", "Laravel", "MySQL", "TailwindCSS"]}
-              description="Une plateforme e-commerce collaborative réalisée en groupe, permettant la gestion de stock, l’ajout de produits et l’administration de rôles utilisateurs. Projet conçu avec une architecture front/back sécurisée, accessible et éco-conçue."
+              description="Une plateforme e-commerce collaborative réalisée en groupe, permettant la gestion de stock, l'ajout de produits et l'administration de rôles utilisateurs. Projet conçu avec une architecture front/back sécurisée, accessible et éco-conçue."
               githubUrl="https://github.com/alex-adkl/Ventes_Meubles.git"
               images={[
                 "/images/dev/VDM/VDM_01.png",
@@ -232,6 +232,20 @@ export default function Home() {
               description="Mon site vitrine personnel, développé avec Next.js, React et Tailwind."
               githubUrl="https://github.com/alex-adkl/portfolio_onepage-2025.git"
               images={["/images/dev/portfolio/portfolio-01.png"]}
+            />
+
+            <ProjectCard
+              title="Good wave"
+              image="/images/dev/goodwave/goodwave_cover.png"
+              stacks={["Swift (SwiftUI)", "Go (Gin)", "MongoDB"]}
+              description="Une application iOS développée en SwiftUI pour découvrir, filtrer et sauvegarder des spots de surf. Back-end en Go avec API REST et base de données MongoDB."
+              githubFrontUrl="https://github.com/alex-adkl/good-wave-app.git"
+              githubBackUrl="https://github.com/alex-adkl/Good_Wave_App_Back_End.git"
+              images={[
+                "/images/dev/goodwave/goodwave_01.png",
+                "/images/dev/goodwave/goodwave_02.png",
+                "/images/dev/goodwave/goodwave_03.png",
+              ]}
             />
           </div>
         </div>
